@@ -13,3 +13,4 @@ playwright-report/
 test-results/
 .playwright-mcp/
 /01-welcome.png
+.kilo/kilo.jsonc

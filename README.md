@@ -37,14 +37,14 @@ Open http://localhost:5173.
 
 ## Mock mode
 
-If `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` are not set, the app runs entirely on local seed data (32 questions across 4 categories). Everything works: playing, admin CRUD (in-memory for the session), participant log, CSV export. Data resets on page reload.
+If `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` are not set, the app runs entirely on local seed data (48 questions across 4 categories). Everything works: playing, admin CRUD (in-memory for the session), participant log, CSV export. Data resets on page reload.
 
 ## Supabase setup
 
 1. Create a project at [supabase.com](https://supabase.com).
 2. Run the SQL files in order in the SQL editor:
    - `supabase/schema.sql` — tables, RLS policies, triggers
-   - `supabase/seed.sql` — 32 seed questions
+   - `supabase/seed.sql` — 48 seed questions
    - `supabase/storage-setup.sql` — `leader-images` storage bucket
 3. Copy the project URL and anon key into `.env`.
 
@@ -98,7 +98,7 @@ tighten the RLS policies in `supabase/schema.sql` accordingly.
 
 Run the one-off production check in [tests/e2e/live-smoke.md](tests/e2e/live-smoke.md) before the event. It covers the live question read, participant write/readback, and Storage access with cleanup instructions.
 
-Before launch, replace the placeholder Voyage Club logo, QR destination, and Guess the Leader portraits with approved event assets.
+Before launch, replace the placeholder Voyage Club logo with an approved event asset. The Instagram and WhatsApp QR codes and the eight Guess the Leader portraits are bundled locally; portrait source and licence details are in [IMAGE_ATTRIBUTION.md](IMAGE_ATTRIBUTION.md).
 
 ## Deploying to Vercel
 

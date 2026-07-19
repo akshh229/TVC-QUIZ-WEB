@@ -7,7 +7,7 @@ function q(partial: Omit<Question, "createdAt" | "updatedAt" | "isActive"> & { i
   return { isActive: true, createdAt: now, updatedAt: now, ...partial };
 }
 
-/** 32 seed questions — 8 per category. Used in mock mode and mirrored in supabase/seed.sql. */
+/** 48 seed questions — 12 per category. Used in mock mode and mirrored in supabase/seed.sql. */
 export const SEED_QUESTIONS: Question[] = [
   // ── Quiz Challenge ────────────────────────────────────────────────
   q({
@@ -74,13 +74,45 @@ export const SEED_QUESTIONS: Question[] = [
     correctAnswer: "Mahatma Gandhi",
     explanation: "Widely attributed to Gandhi, it captures his philosophy of personal responsibility.",
   }),
+  q({
+    id: "quiz-9",
+    category: "quiz",
+    questionText: "Who is widely regarded as the father of the Indian space programme?",
+    options: ["Vikram Sarabhai", "Homi Bhabha", "C. V. Raman", "Satish Dhawan"],
+    correctAnswer: "Vikram Sarabhai",
+    explanation: "Dr. Vikram Sarabhai founded India's space programme and helped establish ISRO.",
+  }),
+  q({
+    id: "quiz-10",
+    category: "quiz",
+    questionText: "Which Indian leader is associated with the White Revolution and the growth of milk cooperatives?",
+    options: ["M. S. Swaminathan", "Verghese Kurien", "Sam Manekshaw", "E. Sreedharan"],
+    correctAnswer: "Verghese Kurien",
+    explanation: "Verghese Kurien led Operation Flood, the programme behind India's White Revolution.",
+  }),
+  q({
+    id: "quiz-11",
+    category: "quiz",
+    questionText: "Which value means accepting responsibility for a decision and its outcome?",
+    options: ["Popularity", "Accountability", "Competition", "Authority"],
+    correctAnswer: "Accountability",
+    explanation: "Accountability means owning your decisions, learning from outcomes, and following through.",
+  }),
+  q({
+    id: "quiz-12",
+    category: "quiz",
+    questionText: "Which of these ideals is named in the Preamble to the Indian Constitution?",
+    options: ["Prosperity", "Fraternity", "Efficiency", "Innovation"],
+    correctAnswer: "Fraternity",
+    explanation: "The Preamble names justice, liberty, equality, and fraternity among India's constitutional ideals.",
+  }),
 
   // ── Guess the Leader ──────────────────────────────────────────────
   q({
     id: "leader-1",
     category: "guess_leader",
     questionText: "Who is this?",
-    imageUrl: "",
+      imageUrl: "/leader-images/apj-abdul-kalam.jpg",
     options: ["Dr. APJ Abdul Kalam", "C. V. Raman", "Homi Bhabha", "Vikram Sarabhai"],
     correctAnswer: "Dr. APJ Abdul Kalam",
     explanation: "The 'Missile Man of India' and 11th President, beloved for inspiring students.",
@@ -89,7 +121,7 @@ export const SEED_QUESTIONS: Question[] = [
     id: "leader-2",
     category: "guess_leader",
     questionText: "Who is this?",
-    imageUrl: "",
+      imageUrl: "/leader-images/sudha-murty.jpg",
     options: ["Kiran Bedi", "Indra Nooyi", "Sudha Murty", "Falguni Nayar"],
     correctAnswer: "Sudha Murty",
     explanation: "Author, philanthropist, and founding trustee of the Infosys Foundation.",
@@ -98,7 +130,7 @@ export const SEED_QUESTIONS: Question[] = [
     id: "leader-3",
     category: "guess_leader",
     questionText: "Who is this?",
-    imageUrl: "",
+      imageUrl: "/leader-images/ratan-tata.jpg",
     options: ["Ratan Tata", "Narayana Murthy", "Azim Premji", "Dhirubhai Ambani"],
     correctAnswer: "Ratan Tata",
     explanation: "Industrialist and philanthropist who led the Tata Group for over two decades.",
@@ -107,7 +139,7 @@ export const SEED_QUESTIONS: Question[] = [
     id: "leader-4",
     category: "guess_leader",
     questionText: "Who is this?",
-    imageUrl: "",
+      imageUrl: "/leader-images/malala-yousafzai.jpg",
     options: ["Rosa Parks", "Malala Yousafzai", "Greta Thunberg", "Kamala Harris"],
     correctAnswer: "Malala Yousafzai",
     explanation: "The youngest Nobel Peace Prize laureate, an advocate for girls' education.",
@@ -116,7 +148,7 @@ export const SEED_QUESTIONS: Question[] = [
     id: "leader-5",
     category: "guess_leader",
     questionText: "Who is this?",
-    imageUrl: "",
+      imageUrl: "/leader-images/sardar-patel.jpg",
     options: ["Sardar Vallabhbhai Patel", "Jawaharlal Nehru", "Rajendra Prasad", "Lal Bahadur Shastri"],
     correctAnswer: "Sardar Vallabhbhai Patel",
     explanation: "The 'Iron Man of India' who unified over 560 princely states.",
@@ -125,7 +157,7 @@ export const SEED_QUESTIONS: Question[] = [
     id: "leader-6",
     category: "guess_leader",
     questionText: "Who is this?",
-    imageUrl: "",
+      imageUrl: "/leader-images/mother-teresa.jpg",
     options: ["Mother Teresa", "Sarojini Naidu", "Annie Besant", "Kasturba Gandhi"],
     correctAnswer: "Mother Teresa",
     explanation: "Founder of the Missionaries of Charity, Nobel Peace Prize laureate 1979.",
@@ -134,7 +166,7 @@ export const SEED_QUESTIONS: Question[] = [
     id: "leader-7",
     category: "guess_leader",
     questionText: "Who is this?",
-    imageUrl: "",
+      imageUrl: "/leader-images/mary-kom.jpg",
     options: ["Mary Kom", "P. V. Sindhu", "Saina Nehwal", "Mithali Raj"],
     correctAnswer: "Mary Kom",
     explanation: "Six-time world champion boxer and Olympic medallist from Manipur.",
@@ -143,10 +175,46 @@ export const SEED_QUESTIONS: Question[] = [
     id: "leader-8",
     category: "guess_leader",
     questionText: "Who is this?",
-    imageUrl: "",
+      imageUrl: "/leader-images/nelson-mandela.jpg",
     options: ["Nelson Mandela", "Martin Luther King Jr.", "Desmond Tutu", "Kofi Annan"],
     correctAnswer: "Nelson Mandela",
     explanation: "Anti-apartheid leader and South Africa's first democratically elected president.",
+  }),
+  q({
+    id: "leader-9",
+    category: "guess_leader",
+    questionText: "Who is this?",
+    imageUrl: "/leader-images/br-ambedkar.jpg",
+    options: ["Dr. B. R. Ambedkar", "Rajendra Prasad", "B. N. Rau", "Maulana Abul Kalam Azad"],
+    correctAnswer: "Dr. B. R. Ambedkar",
+    explanation: "Dr. B. R. Ambedkar chaired the Drafting Committee of the Indian Constitution.",
+  }),
+  q({
+    id: "leader-10",
+    category: "guess_leader",
+    questionText: "Who is this?",
+    imageUrl: "/leader-images/indira-gandhi.png",
+    options: ["Indira Gandhi", "Sarojini Naidu", "Sucheta Kripalani", "Vijaya Lakshmi Pandit"],
+    correctAnswer: "Indira Gandhi",
+    explanation: "Indira Gandhi was India's first woman Prime Minister.",
+  }),
+  q({
+    id: "leader-11",
+    category: "guess_leader",
+    questionText: "Who is this?",
+    imageUrl: "/leader-images/kiran-bedi.jpg",
+    options: ["Kiran Bedi", "Aruna Roy", "Bachendri Pal", "Tessy Thomas"],
+    correctAnswer: "Kiran Bedi",
+    explanation: "Kiran Bedi was India's first woman officer in the Indian Police Service.",
+  }),
+  q({
+    id: "leader-12",
+    category: "guess_leader",
+    questionText: "Who is this?",
+    imageUrl: "/leader-images/pv-sindhu.jpg",
+    options: ["P. V. Sindhu", "Saina Nehwal", "Mithali Raj", "Sakshi Malik"],
+    correctAnswer: "P. V. Sindhu",
+    explanation: "P. V. Sindhu is an Olympic medallist and world champion badminton player.",
   }),
 
   // ── Match the Pair ────────────────────────────────────────────────
@@ -236,6 +304,50 @@ export const SEED_QUESTIONS: Question[] = [
       { left: "Abraham Lincoln", right: "United States" },
       { left: "Jacinda Ardern", right: "New Zealand" },
       { left: "Lee Kuan Yew", right: "Singapore" },
+    ],
+  }),
+  q({
+    id: "match-9",
+    category: "match_pair",
+    questionText: "Match each Indian constitutional leader with their role.",
+    pairs: [
+      { left: "Dr. B. R. Ambedkar", right: "Chaired the Drafting Committee" },
+      { left: "Rajendra Prasad", right: "First President of India" },
+      { left: "Jawaharlal Nehru", right: "First Prime Minister of India" },
+      { left: "B. N. Rau", right: "Constitutional adviser to the Constituent Assembly" },
+    ],
+  }),
+  q({
+    id: "match-10",
+    category: "match_pair",
+    questionText: "Match each Indian innovator with their contribution.",
+    pairs: [
+      { left: "Vikram Sarabhai", right: "Indian space programme" },
+      { left: "Homi J. Bhabha", right: "Indian nuclear programme" },
+      { left: "E. Sreedharan", right: "Delhi Metro leadership" },
+      { left: "Tessy Thomas", right: "Agni missile programme" },
+    ],
+  }),
+  q({
+    id: "match-11",
+    category: "match_pair",
+    questionText: "Match each woman leader with her field.",
+    pairs: [
+      { left: "Kiran Bedi", right: "Indian Police Service" },
+      { left: "P. V. Sindhu", right: "Badminton" },
+      { left: "Kiran Mazumdar-Shaw", right: "Biotechnology" },
+      { left: "Bachendri Pal", right: "Mountaineering" },
+    ],
+  }),
+  q({
+    id: "match-12",
+    category: "match_pair",
+    questionText: "Match each leadership practice with its meaning.",
+    pairs: [
+      { left: "Active listening", right: "Giving full attention before responding" },
+      { left: "Delegation", right: "Assigning ownership with clear expectations" },
+      { left: "Accountability", right: "Owning decisions and outcomes" },
+      { left: "Empathy", right: "Understanding another person's perspective" },
     ],
   }),
 
@@ -351,5 +463,61 @@ export const SEED_QUESTIONS: Question[] = [
     ],
     correctAnswer: "Post a clear correction, thank those who pointed it out, and update the poster",
     explanation: "Transparent correction builds more trust than quiet deletion ever could.",
+  }),
+  q({
+    id: "scenario-9",
+    category: "leadership_scenario",
+    questionText:
+      "A teammate proposes an idea you do not understand, and the group is about to vote. What should you do first?",
+    options: [
+      "Vote against it so the meeting can move on",
+      "Ask them to explain the idea and its benefits before the group decides",
+      "Tell them to send it later by message",
+      "Use your role to choose without discussion",
+    ],
+    correctAnswer: "Ask them to explain the idea and its benefits before the group decides",
+    explanation: "Leaders make informed decisions and create room for every member to contribute.",
+  }),
+  q({
+    id: "scenario-10",
+    category: "leadership_scenario",
+    questionText:
+      "Your team has finished its task early while another group is struggling to set up the event. What do you do?",
+    options: [
+      "Leave immediately because your team's task is complete",
+      "Offer targeted help after confirming your own work is handed over",
+      "Watch but wait to be asked several times",
+      "Tell the coordinator it is not your team's responsibility",
+    ],
+    correctAnswer: "Offer targeted help after confirming your own work is handed over",
+    explanation: "Strong teams look beyond their own checklist and support the shared event goal.",
+  }),
+  q({
+    id: "scenario-11",
+    category: "leadership_scenario",
+    questionText:
+      "A volunteer misses two planning meetings without an explanation. How do you respond?",
+    options: [
+      "Remove them from the group chat immediately",
+      "Check in privately, ask what is happening, and agree on a realistic commitment",
+      "Call them out in front of the whole team",
+      "Give all their work to someone else without speaking to them",
+    ],
+    correctAnswer: "Check in privately, ask what is happening, and agree on a realistic commitment",
+    explanation: "A private, respectful conversation balances accountability with empathy.",
+  }),
+  q({
+    id: "scenario-12",
+    category: "leadership_scenario",
+    questionText:
+      "Feedback on your event says the registration process was confusing. What is the best next step?",
+    options: [
+      "Explain why the process was already clear",
+      "Thank people for the feedback, identify the confusing step, and improve it for the next event",
+      "Delete the feedback form",
+      "Assume only a few people had trouble",
+    ],
+    correctAnswer: "Thank people for the feedback, identify the confusing step, and improve it for the next event",
+    explanation: "Good leaders treat feedback as evidence for improving the experience, not as a personal attack.",
   }),
 ];

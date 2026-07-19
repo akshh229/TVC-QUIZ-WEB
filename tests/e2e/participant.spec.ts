@@ -75,13 +75,23 @@ test("completes a quiz and starts a fresh game", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "That was a strong call." })).toBeVisible();
   await page.getByRole("button", { name: "Finish" }).click();
   await expect(page.getByRole("heading", { name: "Thank you for taking the lead." })).toBeVisible();
+  await expect(
+    page.getByRole("img", { name: "WhatsApp QR code for joining The Voyage Club 2026–27 group" })
+  ).toHaveAttribute("src", "/leader-images/whatsapp.png");
+  await expect(page.getByRole("img", { name: "Instagram QR code for The Voyage Club" })).toHaveAttribute(
+    "src",
+    "/leader-images/insta.png"
+  );
   await page.getByRole("button", { name: "Start a new game" }).click();
   await expect(page).toHaveURL(/\/$/);
 });
 
 test("renders and submits the Guess the Leader challenge", async ({ page }) => {
   await openChallenge(page, "guess_leader");
-  await expect(page.getByText("Portrait coming soon")).toBeVisible();
+  await expect(page.getByRole("img", { name: "A leader to identify" })).toHaveAttribute(
+    "src",
+    "/leader-images/apj-abdul-kalam.jpg"
+  );
   await page.getByRole("radio").first().click();
   await page.getByRole("button", { name: "Submit answer" }).click();
   await expect(page.getByRole("heading", { name: "That was a strong call." })).toBeVisible();

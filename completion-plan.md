@@ -4,12 +4,18 @@
 
 Turn the implemented kiosk app into a release-ready, verifiable project without exercising destructive operations against the live event database during routine UI tests.
 
-## Current baseline
+## Completion status
 
-- Participant and admin screens, mock mode, schema, seed data, and live Supabase connection are implemented.
-- `npm run build` and `npm run typecheck` pass; the live database returns 32 active questions.
-- Browser verification stopped after Welcome and Participant Details. There is no committed Playwright test runner or suite.
-- The repository currently tracks `.env` and generated `node_modules`; no `.gitignore` exists.
+Completed:
+
+- Participant and admin screens, mock mode, schema, seed data, and live Supabase connection.
+- Repository safeguards, Playwright configuration, eight end-to-end tests, favicon, Vercel SPA configuration, and event-day documentation.
+- Eight locally bundled, attributed Guess the Leader portraits; the mock data, seed data, and live Supabase records all use the same paths.
+- Production build and the full Playwright suite pass.
+
+Remaining release action:
+
+- Import the repository in Vercel, add the three documented `VITE_*` environment variables, and deploy. This needs the project owner's Vercel authentication; no authenticated Vercel tool is available in this session.
 
 ## Implementation sequence
 
