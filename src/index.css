@@ -1,0 +1,93 @@
+/* src/index.css */
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Palette — The Voyage Club (HSL triplets) */
+    --ivory: 39 44% 94%; /* #F6F1E8 */
+    --ink: 30 7% 11%; /* #1D1B19 */
+    --terracotta: 15 55% 53%; /* #C96745 */
+    --marigold: 42 71% 54%; /* #DDAA35 */
+    --forest: 154 27% 22%; /* #29473A */
+    --clay: 31 18% 66%; /* #B9AA9A */
+    --card-surface: 43 100% 99%; /* #FFFDF8 */
+    --border: 35 16% 84%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    /* Kiosk: block double-tap zoom / pinch gestures where the browser honours it */
+    touch-action: manipulation;
+  }
+
+  body {
+    @apply bg-ivory text-ink font-sans antialiased;
+    font-feature-settings: "cv02", "cv03";
+    overscroll-behavior: none;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif;
+  }
+
+  /* Kiosk: no text selection on chrome/UI, but keep it in inputs */
+  button,
+  a,
+  label,
+  nav,
+  header,
+  footer {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  input,
+  textarea {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  /* Visible focus for keyboard users */
+  :focus-visible {
+    outline: 2px solid hsl(var(--terracotta));
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Subtle paper grain — very low opacity SVG noise, keeps text readable */
+  .paper-grain {
+    position: relative;
+  }
+  .paper-grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.05'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
