@@ -89,3 +89,29 @@ tighten the RLS policies in `supabase/schema.sql` accordingly.
 | `npm run build` | Typecheck + production build |
 | `npm run preview` | Preview production build |
 | `npm run typecheck` | Typecheck only |
+| `npm run test:e2e` | Run the Playwright acceptance suite in local mock mode |
+| `npm run test:e2e:ui` | Open the Playwright test runner UI |
+
+## Verification and event-day checks
+
+`npm run test:e2e` starts a separate Vite server with Supabase variables deliberately blank. It verifies the participant journey, all four challenge types, and core admin workflows against safe in-memory data; it never writes to the live event project.
+
+Run the one-off production check in [tests/e2e/live-smoke.md](tests/e2e/live-smoke.md) before the event. It covers the live question read, participant write/readback, and Storage access with cleanup instructions.
+
+Before launch, replace the placeholder Voyage Club logo, QR destination, and Guess the Leader portraits with approved event assets.
+
+## Deploying to Vercel
+
+This is a Vite single-page app. Import the Git repository in Vercel; it will use `npm run build`, publish `dist`, and apply the SPA rewrite in `vercel.json` so routes such as `/admin/dashboard` work on a direct visit.
+
+Add these environment variables in **Vercel → Project → Settings → Environment Variables** for every environment that should use live data:
+
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_ANON_KEY`
+- `VITE_ADMIN_PASSWORD`
+
+Leave the two Supabase variables unset for a mock-only preview. Values prefixed with `VITE_` are included in the browser bundle, so `VITE_ADMIN_PASSWORD` is an event-day UI gate, not a server-side secret. Redeploy after changing any variable.
+
+## Repository hygiene
+
+`.env`, `node_modules`, generated builds, and local Playwright artifacts are ignored. Keep only `.env.example` in Git. If an earlier commit containing real environment values was pushed to a shared remote, rotate the Supabase key and admin password before sharing the repository again.

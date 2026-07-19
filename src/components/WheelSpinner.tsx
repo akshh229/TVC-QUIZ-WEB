@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { animate, motion, useMotionValue, useReducedMotion } from "framer-motion";
 import { CircleHelp, UserRound, Waypoints, Compass } from "lucide-react";
 import type { Category } from "@/lib/types";
-import { CATEGORIES, CATEGORY_LABELS } from "@/lib/types";
+import { CATEGORY_LABELS } from "@/lib/types";
 
 interface WheelSpinnerProps {
   onSelected: (category: Category) => void;
