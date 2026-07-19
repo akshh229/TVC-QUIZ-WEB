@@ -1,11 +1,12 @@
 // src/pages/ParticipantDetails.tsx
-import { useState, type FormEvent } from "react";
+import { useState, useMemo, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Check } from "lucide-react";
 import { StepIndicator } from "@/components/StepIndicator";
 import { useGameStore } from "@/store/gameStore";
 
@@ -18,6 +19,7 @@ export default function ParticipantDetails() {
   const [name, setName] = useState(storedName);
   const [department, setDepartment] = useState(storedDept);
   const [nameError, setNameError] = useState<string | null>(null);
+  const nameIsValid = useMemo(() => name.trim().length >= 2, [name]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -60,20 +62,31 @@ export default function ParticipantDetails() {
               <Label htmlFor="participant-name">
                 Full name <span className="text-terracotta">*</span>
               </Label>
-              <Input
-                id="participant-name"
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                  if (nameError && e.target.value.trim().length >= 2) setNameError(null);
-                }}
-                placeholder="e.g., Ananya Sharma"
-                autoComplete="off"
-                aria-required="true"
-                aria-invalid={!!nameError}
-                aria-describedby={nameError ? "name-error" : undefined}
-                className="text-lg"
-              />
+              <div className="relative">
+                <Input
+                  id="participant-name"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                    if (nameError && e.target.value.trim().length >= 2) setNameError(null);
+                  }}
+                  placeholder="e.g., Ananya Sharma"
+                  autoFocus
+                  autoComplete="off"
+                  aria-required="true"
+                  aria-invalid={!!nameError}
+                  aria-describedby={nameError ? "name-error" : undefined}
+                  className="text-lg pr-12"
+                />
+                {nameIsValid && !nameError && (
+                  <span
+                    className="absolute right-4 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full bg-forest text-card"
+                    aria-label="Name is valid"
+                  >
+                    <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                  </span>
+                )}
+              </div>
               {nameError && (
                 <p id="name-error" className="text-sm text-terracotta" role="alert">
                   {nameError}

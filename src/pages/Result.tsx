@@ -117,10 +117,15 @@ export default function Result() {
       {isCorrect && !prefersReducedMotion && <ConfettiBurst />}
 
       {/* Warm radial highlight behind the headline on success */}
-      {isCorrect && (
+      {isCorrect ? (
         <div
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-1/3 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-marigold/20 blur-3xl"
+        />
+      ) : (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-1/3 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-clay/15 blur-3xl"
         />
       )}
 
@@ -137,11 +142,11 @@ export default function Result() {
               : "text-xs font-semibold uppercase tracking-[0.22em] text-ink/45"
           }
         >
-          {isCorrect ? "Well played" : "Keep going"}
+          {isCorrect ? "Well played" : "Nice try!"}
         </span>
 
         <h1 className="mt-4 font-serif text-5xl leading-tight text-ink sm:text-6xl">
-          {isCorrect ? "That was a strong call." : "Good attempt."}
+          {isCorrect ? "That was a strong call." : "Almost there!"}
         </h1>
 
         {isCorrect ? (
@@ -165,7 +170,7 @@ export default function Result() {
               </div>
             )}
             <p className="mt-6 max-w-md text-balance text-sm italic text-ink/50">
-              Every great leader keeps learning.
+              Every great leader keeps exploring — try another category!
             </p>
           </>
         )}

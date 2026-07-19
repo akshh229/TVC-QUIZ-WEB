@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { shuffle } from "@/lib/utils";
+import { cn, shuffle } from "@/lib/utils";
 import type { Question } from "@/lib/types";
 
 export type PairSelections = Record<string, string>;
@@ -49,18 +49,31 @@ export function MatchPairChallenge({
       <div className="mt-8 space-y-3">
         {pairs.map((pair, index) => {
           const value = selections[pair.left] ?? "";
+          const isMatched = !!value;
           const selectId = `pair-select-${index}`;
           return (
             <div
               key={pair.left}
-              className="grid items-center gap-2 rounded-md border border-ink/12 bg-card p-4 sm:grid-cols-[1fr_auto_1.4fr] sm:gap-4"
+              className={cn(
+                "grid items-center gap-2 rounded-md border bg-card p-5 sm:grid-cols-[1fr_auto_1.4fr] sm:gap-4",
+                isMatched
+                  ? "border-l-4 border-forest/60 border-y-ink/12 border-r-ink/12"
+                  : "border-ink/12"
+              )}
             >
-              <label
-                htmlFor={selectId}
-                className="font-medium leading-snug text-ink"
-              >
-                {pair.left}
-              </label>
+              <div className="min-w-0">
+                <label
+                  htmlFor={selectId}
+                  className="font-medium leading-snug text-ink"
+                >
+                  {pair.left}
+                </label>
+                {isMatched && (
+                  <span className="ml-2 inline-flex items-center rounded-full bg-forest-soft px-2.5 py-0.5 text-xs font-medium text-forest sm:hidden">
+                    {value}
+                  </span>
+                )}
+              </div>
               <span aria-hidden="true" className="hidden text-ink/30 sm:block">
                 →
               </span>

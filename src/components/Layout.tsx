@@ -1,8 +1,9 @@
 // src/components/Layout.tsx
-import type { ReactNode } from "react";
-import { useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
+import { useCallback, useState, type ReactNode } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import { Logo } from "./Logo";
+import { IdleWarningOverlay } from "./IdleWarningOverlay";
 import { useIdleTimeout } from "@/lib/utils";
 import { useGameStore } from "@/store/gameStore";
 
@@ -13,17 +14,24 @@ interface LayoutProps {
 }
 
 /**
- * Participant kiosk layout: paper-grain ivory backdrop, idle timeout that
- * resets the whole session back to Welcome, and a subtle page transition.
+ * Participant kiosk layout: paper-grain ivory backdrop, two-phase idle
+ * timeout (warning overlay → session reset), and a subtle page transition.
  */
 export function Layout({ children, hideHeader = false }: LayoutProps) {
   const location = useLocation();
+  const navigate = useNavigate();
   const resetSession = useGameStore((s) => s.resetSession);
+  const [showIdleWarning, setShowIdleWarning] = useState(false);
 
-  useIdleTimeout(() => {
+  const handleWarn = useCallback(() => setShowIdleWarning(true), []);
+  const handleDismiss = useCallback(() => setShowIdleWarning(false), []);
+  const handleIdle = useCallback(() => {
+    setShowIdleWarning(false);
     resetSession();
-    window.location.assign("/");
-  });
+    navigate("/");
+  }, [resetSession, navigate]);
+
+  useIdleTimeout({ onWarn: handleWarn, onIdle: handleIdle, onDismiss: handleDismiss });
 
   return (
     <div className="paper-grain flex min-h-dvh flex-col bg-ivory">
@@ -44,6 +52,12 @@ export function Layout({ children, hideHeader = false }: LayoutProps) {
       >
         {children}
       </motion.main>
+
+      {/* Idle warning overlay */}
+      <AnimatePresence>
+        {showIdleWarning && <IdleWarningOverlay />}
+      </AnimatePresence>
     </div>
   );
 }
+

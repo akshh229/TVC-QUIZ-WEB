@@ -121,6 +121,6 @@ test("renders an incorrect Leadership Scenario result with the correct answer", 
   await expect(page.getByText("Your project team's presentation is tomorrow")).toBeVisible();
   await page.getByRole("radio").first().click();
   await page.getByRole("button", { name: "Submit answer" }).click();
-  await expect(page.getByRole("heading", { name: "Good attempt." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Almost there!" })).toBeVisible();
   await expect(page.getByText("Sit with them tonight, split the section, and help them finish it")).toBeVisible();
 });

@@ -1,4 +1,5 @@
 // src/components/challenges/LeadershipScenarioChallenge.tsx
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import type { Question } from "@/lib/types";
 
@@ -34,15 +35,20 @@ export function LeadershipScenarioChallenge({
         {options.map((option, i) => {
           const isSelected = selected === option;
           return (
-            <button
+            <motion.button
               key={option}
               type="button"
               role="radio"
               aria-checked={isSelected}
               disabled={disabled}
-              onClick={() => onSelect(option)}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              onClick={() => {
+                onSelect(option);
+                navigator.vibrate?.(8);
+              }}
               className={cn(
-                "flex min-h-[60px] items-center gap-4 rounded-md border bg-card px-5 py-4 text-left text-base transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-60",
+                "flex min-h-[72px] items-center gap-4 rounded-md border bg-card px-5 py-4 text-left text-base transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-60",
                 isSelected
                   ? "border-forest bg-forest-soft shadow-card"
                   : "border-ink/12 hover:border-ink/30 hover:bg-ink/[0.02]"
@@ -60,7 +66,7 @@ export function LeadershipScenarioChallenge({
               <span className={cn("leading-snug", isSelected ? "font-medium text-ink" : "text-ink/80")}>
                 {option}
               </span>
-            </button>
+            </motion.button>
           );
         })}
       </div>
