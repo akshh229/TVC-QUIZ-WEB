@@ -6,47 +6,27 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
 import { useGameStore } from "@/store/gameStore";
 
-/** Decorative compass/wheel line art — pure SVG, right-side focal point. */
-function CompassMotif() {
+/**
+ * Club boat logo with a gentle "sailing" motion — rocks and bobs as if
+ * riding a slow swell. Respects prefers-reduced-motion via framer-motion.
+ */
+function SailingLogo() {
   return (
-    <svg
-      viewBox="0 0 560 560"
-      className="h-full w-full"
-      aria-hidden="true"
-      fill="none"
-    >
-      {/* concentric circular paths */}
-      <circle cx="280" cy="280" r="258" stroke="hsl(30 7% 11% / 0.10)" strokeWidth="1" />
-      <circle cx="280" cy="280" r="212" stroke="hsl(30 7% 11% / 0.14)" strokeWidth="1" strokeDasharray="2 7" />
-      <circle cx="280" cy="280" r="164" stroke="hsl(15 55% 53% / 0.35)" strokeWidth="1.5" />
-      <circle cx="280" cy="280" r="112" stroke="hsl(30 7% 11% / 0.16)" strokeWidth="1" />
-      {/* quadrant ticks */}
-      <g stroke="hsl(30 7% 11% / 0.35)" strokeWidth="1.5">
-        <line x1="280" y1="10" x2="280" y2="34" />
-        <line x1="280" y1="526" x2="280" y2="550" />
-        <line x1="10" y1="280" x2="34" y2="280" />
-        <line x1="526" y1="280" x2="550" y2="280" />
-      </g>
-      {/* wheel quarters hinted with arcs */}
-      <path
-        d="M 280 168 A 112 112 0 0 1 392 280"
-        stroke="hsl(42 71% 54% / 0.8)"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-      <path
-        d="M 168 280 A 112 112 0 0 1 280 168"
-        stroke="hsl(154 27% 22% / 0.5)"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-      {/* compass needle */}
-      <g transform="rotate(38 280 280)">
-        <path d="M280 214 L292 280 L280 346 L268 280 Z" fill="hsl(15 55% 53%)" opacity="0.9" />
-        <circle cx="280" cy="280" r="7" fill="hsl(30 7% 11%)" />
-        <circle cx="280" cy="280" r="3" fill="hsl(39 44% 94%)" />
-      </g>
-    </svg>
+    <motion.img
+      src="/the_voyage_club_chandigarh_university_cover.jpg"
+      alt="The Voyage Club — Chandigarh University"
+      className="w-full max-w-lg select-none object-contain drop-shadow-sm"
+      draggable={false}
+      animate={{
+        y: [0, -10, 0, 8, 0],
+        rotate: [0, 1.4, 0, -1.4, 0],
+      }}
+      transition={{
+        duration: 6,
+        ease: "easeInOut",
+        repeat: Infinity,
+      }}
+    />
   );
 }
 
@@ -120,9 +100,9 @@ export default function Welcome() {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto hidden aspect-square w-full max-w-md lg:block"
+          className="relative mx-auto hidden w-full items-center justify-center lg:flex"
         >
-          <CompassMotif />
+          <SailingLogo />
         </motion.div>
       </section>
 

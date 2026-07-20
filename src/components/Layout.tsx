@@ -6,6 +6,9 @@ import { Logo } from "./Logo";
 import { IdleWarningOverlay } from "./IdleWarningOverlay";
 import { useIdleTimeout } from "@/lib/utils";
 import { useGameStore } from "@/store/gameStore";
+import myBharat from "@/brand/my-bharat.png";
+import youthAffairs from "@/brand/youth-affairs-sports.png";
+import chandigarhUniversity from "@/brand/chandigarh-university.webp";
 
 interface LayoutProps {
   children: ReactNode;
@@ -34,7 +37,25 @@ export function Layout({ children, hideHeader = false }: LayoutProps) {
   useIdleTimeout({ onWarn: handleWarn, onIdle: handleIdle, onDismiss: handleDismiss });
 
   return (
-    <div className="paper-grain flex min-h-dvh flex-col bg-ivory">
+    <div className="paper-grain relative flex min-h-dvh flex-col">
+      {/* Partner logo strip — sits above all page content, site-wide */}
+      <div className="relative z-10 flex items-center justify-center gap-6 border-b border-ink/10 bg-card-surface/70 px-6 py-3 backdrop-blur-sm sm:gap-10 sm:px-10">
+        <img
+          src={myBharat}
+          alt="MY Bharat"
+          className="h-10 w-auto object-contain sm:h-12"
+        />
+        <img
+          src={youthAffairs}
+          alt="Ministry of Youth Affairs & Sports"
+          className="h-10 w-auto object-contain sm:h-12"
+        />
+        <img
+          src={chandigarhUniversity}
+          alt="Chandigarh University"
+          className="h-10 w-auto object-contain sm:h-12"
+        />
+      </div>
       {!hideHeader && (
         <header className="relative z-10 flex items-center justify-between px-6 py-5 sm:px-10">
           <Logo variant="compact" />

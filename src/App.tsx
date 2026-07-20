@@ -2,6 +2,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Layout } from "@/components/Layout";
+import { LoadingScreen } from "@/components/LoadingScreen";
 import { Toaster } from "@/components/ui/toaster";
 import Welcome from "@/pages/Welcome";
 import ParticipantDetails from "@/pages/ParticipantDetails";
@@ -28,6 +29,8 @@ const queryClient = new QueryClient({
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      {/* Full-screen boat-logo loader — shows once on initial app load */}
+      <LoadingScreen />
       <BrowserRouter>
         <Routes>
           {/* Participant kiosk */}
